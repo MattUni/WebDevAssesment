@@ -2,6 +2,7 @@ const menuToggle=document.getElementById('menu-toggle');
 const menuNav=document.getElementById('menu-nav');
 const submitButton=document.getElementById('submit');
 const gothType=document.getElementById('type');
+const itemName=document.getElementById('itemname');
 const list1=document.getElementById('testlist');
 
 
@@ -14,11 +15,14 @@ typeGet=()=>{
   return gothType.options[gothType.selectedIndex].value;
 };
 
-function addItem (item){
+
+function addItem(item){
   const itemElement = document.createElement('li');
-  itemElement.textContent = item;
+  itemElement.textContent = itemName.value;
   list1.appendChild(itemElement);
+  console.log(itemElement);
+  console.log(itemName.value);
 }
 
-menuToggle.addEventListener("click",toggleMenu);
+menuToggle.addEventListener("click", toggleMenu);
 submitButton.addEventListener("click", addItem);

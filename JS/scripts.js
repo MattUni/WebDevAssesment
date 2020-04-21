@@ -4,6 +4,7 @@ const submitButton=document.getElementById('submit');
 const clearButton=document.getElementById('clearAll');
 const gothType=document.getElementById('type');
 const itemName=document.getElementById('itemname');
+const itemLink=document.getElementById('itemlink')
 const list1=document.getElementById('testlist');
 
 
@@ -17,9 +18,9 @@ typeGet=()=>{
 };
 
 
-function addItem(item){
+function addItem(item, link){
   const itemElement = document.createElement('li');
-  itemElement.textContent = itemName.value;
+  itemElement.textContent = item.concat(link);
   const deleteButton = document.createElement('button');
   deleteButton.textContent= 'x';
   itemElement.appendChild(deleteButton);
@@ -42,8 +43,9 @@ menuToggle.addEventListener("click", toggleMenu);
 
 submitButton.addEventListener("click", ev => {
   if(itemName.value){
-    addItem();
+    addItem(itemName.value, itemLink.value);
     itemName.value=null;
+    itemLink.value=null;
   }
 });
 
@@ -53,9 +55,9 @@ window.addEventListener('beforeunload', ev =>{
   const items = [...list1.childNodes];
   if(items.length){
     const list = items.map(item=> {
-      return items.textContent.slice(0, -1);
+      return item.textContent.slice(0, -1);
     });
-    localStorage.setItem('test-list', list.join('\n'));
+    localStorage.setItem('test-list', list);
   } else{
     localStorage.removeItem('test-list');
   }
